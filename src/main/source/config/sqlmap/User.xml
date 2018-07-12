@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="test">
+    <select id="findUserById" parameterType="int" resultType="cn.pojo.User">
+        SELECT *
+        FROM user
+        WHERE id = #{value}
+    </select>
+    <!--resultType指定的就是单条记录所映射的java对象-->
+    <!--#{}代表的是一个占位符,${}标示字符串拼接,将接收的数据不加修饰直接加入sql语句(有危险,可能会有SQL注入攻击)-->
+    <select id="findUserByName" parameterType="java.lang.String" resultType="cn.pojo.User">
+        SELECT *
+        FROM user
+        WHERE username LIKE '%${value}%'
+    </select>
+    <!--输入参数类型,不是简单的类型了,参数类型是pojo
+    #{}中指定pojo的属性，接收到pojo对象的属性值，mybatis通过OGNL获取对象的属性值。
+    -->
+    <insert id="insertUser" parameterType="cn.pojo.User">
+        INSERT INTO user (username, birthday, sex, address) VALUE (#{username}, #{birthday}, #{sex}, #{address})
+
+    </insert>
+
+    <delete id="deleteUser" parameterType="int" >
+        DELETE FROM user WHERE id=#{id}
+    </delete>
+
+    <update id="updateUser" parameterType="cn.pojo.User">
+        UPDATE user SET username=#{username},birthday=#{birthday},sex=#{sex},address=#{address} WHERE id=#{id}
+    </update>
+</mapper>
