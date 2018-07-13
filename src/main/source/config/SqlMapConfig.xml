@@ -3,18 +3,26 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+    <properties resource="config/db.properties"/>
+
+<typeAliases>
+    <!--针对单个别名的定义-->
+    <!--<typeAlias type="cn.pojo.User" alias="user"/>-->
+    <!--批量别名 自动扫描包中的pojo类，自动别名，别名就是类名（首字母大小写都可以） *常用*-->
+    <package name="cn.pojo"/>
+</typeAliases>
 
     <!-- 和spring整合后 environments配置将废除-->
     <environments default="development">
         <environment id="development">
             <!-- 使用jdbc事务管理，事务控制由mybatis-->
-            <transactionManager type="JDBC" />
+            <transactionManager type="JDBC"/>
             <!-- 数据库连接池，由mybatis管理-->
             <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.jdbc.Driver" />
-                <property name="url" value="jdbc:mysql://localhost:3306/mybatis?characterEncoding=utf-8" />
-                <property name="username" value="root" />
-                <property name="password" value="root" />
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
             </dataSource>
         </environment>
     </environments>
@@ -22,6 +30,19 @@
 
     <mappers>
         <mapper resource="config/sqlmap/User.xml"/>
+        <!--通过resource方法加载一个xml 加载单个映射文件-->
+       <!-- <mapper resource="config/Mapper/UserMapper.xml"/>-->
+
+        <!--通过mapper接口加载
+        规范：需要将mapper的接口类名和mapper.xml文件名称保持一致，并且在一个目录中。
+        前提是，使用的是mapper代理的方法
+        -->
+       <!-- <mapper class="cn.mapper.UserMapper"/>-->
+        <!--批量加载(推荐使用)
+        规范：需要将mapper的接口类名和mapper.xml文件名称保持一致，并且在一个目录中。
+        前提是，使用的是mapper代理的方法
+        -->
+       <package name="cn.mapper"/>
     </mappers>
 
 </configuration>

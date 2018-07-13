@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 /**
  * cn.first
@@ -46,7 +47,29 @@ public class MybatisFirst {
         // 释放资源
         sqlSession.close ();
     }
+    /**
+     * 模糊查询，根据姓名查询。
+     */
+    @Test
+    public void findUserByName() throws IOException {
+        String resource = "config/SqlMapConfig.xml";
+        // 得到配置文件流
+        InputStream inputStream = Resources.getResourceAsStream (resource);
 
+        // 创建会话工厂，传入mybatis的配置文件信息
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder ()
+                .build (inputStream);
+
+        // 通过工厂得到SqlSession
+        SqlSession sqlSession = sqlSessionFactory.openSession ();
+        List<User> list = sqlSession.selectList ("test.findUserByName", "小明");
+
+        for (User user : list) {
+            System.out.println (user);
+        }
+        // 释放资源
+        sqlSession.close ();
+    }
     /**
      * 插入用户信息
      */
@@ -62,7 +85,7 @@ public class MybatisFirst {
 
         // 通过工厂得到SqlSession
         SqlSession sqlSession = sqlSessionFactory.openSession ();
-        User user = new User ( "jh", new java.util.Date (), "男", "西安工业大学");
+        User user = new User ( "heheda", new java.util.Date (), "女", "梦想中心");
         sqlSession.insert ("test.insertUser", user);
         sqlSession.commit ();
         //获取用户主键信息
@@ -74,7 +97,7 @@ public class MybatisFirst {
 
 
     @Test
-    public void deletUser() throws IOException {
+    public void deleteUser() throws IOException {
         String resource = "config/SqlMapConfig.xml";
         // 得到配置文件流
         InputStream inputStream = Resources.getResourceAsStream (resource);
