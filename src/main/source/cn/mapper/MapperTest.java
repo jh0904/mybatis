@@ -1,8 +1,6 @@
 package cn.mapper;
 
-import cn.pojo.User;
-import cn.pojo.UserCustom;
-import cn.pojo.UserQueryVo;
+import cn.pojo.*;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -11,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -57,6 +56,11 @@ public class MapperTest {
         UserCustom userCustom = new UserCustom ();
         userCustom.setSex ("1");
         userCustom.setUsername ("小");
+        List<Integer> list = new ArrayList<> ();
+        list.add (1);
+        list.add (10);
+        list.add (16);
+        userQueryVo.setIds (list);
         userQueryVo.setUserCustom (userCustom);
 
 
@@ -92,5 +96,35 @@ public class MapperTest {
 
         User userByIResultMap = userMapper.findUserByIResultMap (1);
         System.out.println (userByIResultMap);
+
+        sqlSession.close ();
+
+    }
+
+    @Test
+    public void findOrdersUser() throws Exception {
+        SqlSession sqlSession = sqlSessionFactory.openSession ();
+        //创建UserMapper对象，自动生成mapper代理对象
+        OrderMapperCustom orderMapperCustom = sqlSession.getMapper (OrderMapperCustom.class);
+
+        List<OrdersCustom> ordersUser = orderMapperCustom.findOrdersUser ();
+        System.out.println (ordersUser);
+
+        sqlSession.close ();
+
+    }
+
+    @Test
+    public void findOrdersUserResultMap() throws Exception {
+        SqlSession sqlSession = sqlSessionFactory.openSession ();
+        //创建UserMapper对象，自动生成mapper代理对象
+        OrderMapperCustom orderMapperCustom = sqlSession.getMapper (OrderMapperCustom.class);
+
+        List<Orders> ordersUserResultMap = orderMapperCustom.findOrdersUserResultMap ();
+        for (Orders orders : ordersUserResultMap) {
+            System.out.println (orders);
+        }
+        sqlSession.close ();
+
     }
 }

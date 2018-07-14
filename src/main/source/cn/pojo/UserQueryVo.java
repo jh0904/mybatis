@@ -1,5 +1,7 @@
 package cn.pojo;
 
+import java.util.List;
+
 /**
  * cn.pojo
  *
@@ -11,7 +13,10 @@ public class UserQueryVo {
     /**
      * 用户查询条件*/
     private UserCustom userCustom;
+
     //包装订单、商品信息
+
+    private List<Integer> ids;
 
     public UserCustom getUserCustom() {
         return userCustom;
@@ -19,5 +24,13 @@ public class UserQueryVo {
 
     public void setUserCustom(UserCustom userCustom) {
         this.userCustom = userCustom;
+    }
+
+    public List<Integer> getIds() {
+        return ids;
+    }
+
+    public void setIds(List<Integer> ids) {
+        this.ids = ids;
     }
 }

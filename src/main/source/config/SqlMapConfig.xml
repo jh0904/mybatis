@@ -4,7 +4,6 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <properties resource="config/db.properties"/>
-
 <typeAliases>
     <!--针对单个别名的定义-->
     <!--<typeAlias type="cn.pojo.User" alias="user"/>-->
