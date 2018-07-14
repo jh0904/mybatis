@@ -13,6 +13,8 @@ public class Orders {
     private Date createtime;
 
     private String note;
+    //订单明细
+    List<Orderdetail> orderDetails;
 
     //用户信息
     private User user;
@@ -76,6 +78,14 @@ public class Orders {
         this.orderdetails = orderdetails;
     }
 
+    public List<Orderdetail> getOrderDetails() {
+        return orderDetails;
+    }
+
+    public void setOrderDetails(List<Orderdetail> orderDetails) {
+        this.orderDetails = orderDetails;
+    }
+
     @Override
     public String toString() {
         return "Orders{" +
@@ -84,6 +94,7 @@ public class Orders {
                 ", number='" + number + '\'' +
                 ", createtime=" + createtime +
                 ", note='" + note + '\'' +
+                ", orderDetails=" + orderDetails +
                 ", user=" + user +
                 ", orderdetails=" + orderdetails +
                 '}';

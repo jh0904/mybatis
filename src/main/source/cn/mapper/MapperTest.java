@@ -127,4 +127,34 @@ public class MapperTest {
         sqlSession.close ();
 
     }
+/*测试findOrdersAndOrderDetailResultMap*/
+    @Test
+    public void findOrdersAndOrderDetailResultMap() throws Exception {
+        SqlSession sqlSession = sqlSessionFactory.openSession ();
+        //创建UserMapper对象，自动生成mapper代理对象
+        OrderMapperCustom orderMapperCustom = sqlSession.getMapper (OrderMapperCustom.class);
+
+        List<Orders> ordersUserResultMap = orderMapperCustom.findOrdersAndOrderDetailResultMap();
+        for (Orders orders : ordersUserResultMap) {
+            System.out.println (orders);
+        }
+        sqlSession.close ();
+
+    }
+
+
+    /*测试findUserAndItemResultMap*/
+    @Test
+    public void findUserAndItemResultMap() throws Exception {
+        SqlSession sqlSession = sqlSessionFactory.openSession ();
+        //创建UserMapper对象，自动生成mapper代理对象
+        OrderMapperCustom orderMapperCustom = sqlSession.getMapper (OrderMapperCustom.class);
+
+        List<User> ordersUserResultMap = orderMapperCustom.findUserAndItemResultMap();
+        for (User orders : ordersUserResultMap) {
+            System.out.println (orders);
+        }
+        sqlSession.close ();
+
+    }
 }

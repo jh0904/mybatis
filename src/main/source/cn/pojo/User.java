@@ -1,6 +1,7 @@
 package cn.pojo;
 
 import java.util.Date;
+import java.util.List;
 
 public class User {
 
@@ -9,6 +10,8 @@ public class User {
   private Date birthday;
   private String sex;
   private String address;
+
+  private List<Orders> orderList;
 
   public User() {
   }
@@ -28,7 +31,7 @@ public class User {
     this.address = address;
   }
 
-  public long getId() {
+  public int getId() {
     return id;
   }
 
@@ -44,7 +47,6 @@ public class User {
     this.username = username;
   }
 
-
   public Date getBirthday() {
     return birthday;
   }
@@ -52,7 +54,6 @@ public class User {
   public void setBirthday(Date birthday) {
     this.birthday = birthday;
   }
-
 
   public String getSex() {
     return sex;
@@ -62,13 +63,20 @@ public class User {
     this.sex = sex;
   }
 
-
   public String getAddress() {
     return address;
   }
 
   public void setAddress(String address) {
     this.address = address;
+  }
+
+  public List<Orders> getOrderList() {
+    return orderList;
+  }
+
+  public void setOrderList(List<Orders> orderList) {
+    this.orderList = orderList;
   }
 
   @Override
@@ -79,6 +87,7 @@ public class User {
             ", birthday=" + birthday +
             ", sex='" + sex + '\'' +
             ", address='" + address + '\'' +
+            ", orderList=" + orderList +
             '}';
   }
 }

@@ -2,6 +2,7 @@ package cn.mapper;
 
 import cn.pojo.Orders;
 import cn.pojo.OrdersCustom;
+import cn.pojo.User;
 
 import java.util.List;
 
@@ -16,4 +17,8 @@ public interface OrderMapperCustom {
     public List<OrdersCustom> findOrdersUser() throws Exception;
 
     public List<Orders> findOrdersUserResultMap() throws Exception;
+
+    public List<Orders> findOrdersAndOrderDetailResultMap() throws Exception;
+
+    public List<User> findUserAndItemResultMap() throws Exception;
 }
